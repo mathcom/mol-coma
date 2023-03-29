@@ -1,0 +1,10 @@
+Name: mol-coma
+Version: 0.1.3
+Summary: COMA: efficient structure-constrained molecular generation using contractive and margin losses
+Home-page: UNKNOWN
+Author: Jonghwan Choi
+Author-email: mathcombio@yonsei.ac.kr
+License: BSD 3-Clause License
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: ==3.6.*
