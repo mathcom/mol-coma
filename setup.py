@@ -2,12 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'mol-coma',
-    version = '0.1.4',
+    version = '0.1.5',
     description = 'Choi, J., Seo, S. & Park, S. COMA: efficient structure-constrained molecular generation using contractive and margin losses. J Cheminform 15, 8 (2023). https://doi.org/10.1186/s13321-023-00679-y',
     author = 'Jonghwan Choi',
     author_email = 'mathcombio@yonsei.ac.kr',
     url = 'https://github.com/mathcom/mol-coma',
-    download_url = 'https://github.com/mathcom/mol-coma/archive/refs/tags/v0.1.tar.gz',
     install_requires = [
         'numpy==1.19.5',
         'scikit-learn==0.20.0',
@@ -26,7 +25,7 @@ setup(
     keywords = ['coma', 'mol-coma'],
     python_requires = '==3.7.*',
     package_data = {
-        '': ['*.pkl.gz', ]
+        '': ['*.pkl.gz', '*.pkl']
     },
     zip_safe = False,
     classifiers = [
