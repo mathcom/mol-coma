@@ -13,7 +13,6 @@ from rdkit.DataStructs import TanimotoSimilarity
 from rdkit.Chem.AllChem import GetMorganFingerprintAsBitVect
 import rdkit.Chem.QED as QED
 
-import coma.drd2_scorer as DRD2
 import coma.sascorer as sascorer
 
 
@@ -55,15 +54,6 @@ def qed(s):
                 return QED.qed(mol)
         except:
             return 0.
-
-
-def drd2(s):
-    if s is None:
-        return 0.0
-    elif Chem.MolFromSmiles(s) is None:
-        return 0.0
-    else:
-        return DRD2.get_score(s)
 
 
 # Modified from https://github.com/bowenliu16/rl_graph_generation

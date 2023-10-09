@@ -16,15 +16,6 @@ from coma.properties import similarity
 class RewardFunctionLogP(object):
     def __init__(self, similarity_ft, scoring_ft, threshold_similarity, threshold_property):
         super(RewardFunctionLogP, self).__init__()
-        '''
-        DRD2
-        - threshold_similarity = 0.3
-        - threshold_property = 0.
-        
-        QED
-        - threshold_similarity = 0.3
-        - threshold_property = 0.7
-        '''
         self.similarity_ft = similarity_ft
         self.scoring_ft = scoring_ft
         self.threshold_similarity = threshold_similarity
@@ -44,10 +35,6 @@ class RewardFunction(object):
     def __init__(self, similarity_ft, scoring_ft, threshold_similarity, threshold_property):
         super(RewardFunction, self).__init__()
         '''
-        DRD2
-        - threshold_similarity = 0.3
-        - threshold_property = 0.
-        
         QED
         - threshold_similarity = 0.3
         - threshold_property = 0.7

@@ -1,6 +1,6 @@
 # mol-coma
-- Latest version: 0.1.5
-- Latest update: 05 April 2023
+- Latest version: 2.0.0
+- Latest update: 10 October 2023
 
 ----
 This repo is for the pypi project of COMA (contractive and margin losses for molecular generation).
