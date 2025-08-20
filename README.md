@@ -1,6 +1,6 @@
 # mol-coma
-- Latest version: 2.0.0
-- Latest update: 10 October 2023
+- Latest version: 2.1.0
+- Latest update: 20 August 2025
 
 ----
 This repo is for the pypi project of COMA (contractive and margin losses for molecular generation).
@@ -18,4 +18,4 @@ Choi, J., Seo, S. & Park, S. COMA: efficient structure-constrained molecular gen
 
 ----
 ## Contact
-email: mathcombio@yonsei.ac.kr
+email: jonghwanc@hallym.ac.kr

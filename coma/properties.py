@@ -5,12 +5,11 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 import imp
 import networkx as nx
 import numpy as np
-from numpy.core.umath_tests import inner1d
 
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdFMCS
 from rdkit.DataStructs import TanimotoSimilarity
-from rdkit.Chem.AllChem import GetMorganFingerprintAsBitVect
+from rdkit.Chem import rdFingerprintGenerator
 import rdkit.Chem.QED as QED
 
 import coma.sascorer as sascorer
@@ -92,8 +91,9 @@ def similarity(a, b):
     if amol is None or bmol is None:
         return 0.0
     else:
-        fp1 = GetMorganFingerprintAsBitVect(amol, 2, nBits=2048, useChirality=False)
-        fp2 = GetMorganFingerprintAsBitVect(bmol, 2, nBits=2048, useChirality=False)
+        mfpgen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048, includeChirality=False)
+        fp1 = mfpgen.GetFingerprint(amol)
+        fp2 = mfpgen.GetFingerprint(bmol)
         return TanimotoSimilarity(fp1, fp2) 
 
 
@@ -114,6 +114,7 @@ def mcs_similarity(a, b):
 class FastTanimotoOneToBulk:
     def __init__(self, bs):
         self.bs = bs
+        self.mfpgen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048, includeChirality=False)
         self.b_fps = np.vstack([self._fingerprints_from_smi(smi) for smi in self.bs])
         
     def __call__(self, a):
@@ -122,14 +123,14 @@ class FastTanimotoOneToBulk:
         
     def _fingerprints_from_smi(self, smi):
         mol = Chem.MolFromSmiles(smi)
-        fp = GetMorganFingerprintAsBitVect(mol, 2, nBits=2048, useChirality=False)
-        nfp = np.array([b=='1' for b in fp.ToBitString()])
+        #fp = self.mfpgen.GetFingerprint(mol)
+        #nfp = np.array([b=='1' for b in fp.ToBitString()])
+        nfp = self.mfpgen.GetFingerprintAsNumPy(mol).astype(bool)
         return nfp
 
 
 if __name__ == "__main__":
     ex = 'COC1=NOC(C(=O)NC2=CC=CC=C2OC2=CC=CC=C2)=C1'
-    print(drd2(ex))
     print(qed(ex))
     print(penalized_logp(ex))
     
@@ -146,6 +147,5 @@ if __name__ == "__main__":
         max_sim = max(max_sim, similarity(ex, b))
     print(max_sim)
     
-    #print(FastTanimotoOneToBulk(bulks)(ex))
-    for sim in FastTanimotoOneToBulk(bulks)(ex, reduction=None):
+    for sim in FastTanimotoOneToBulk(bulks)(ex):
         print(sim)
